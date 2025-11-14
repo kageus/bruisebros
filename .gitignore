@@ -1,0 +1,22 @@
+# Minecraft Server .gitignore
+
+# World directories (backup these separately!)
+world/
+realworld/
+survivalworld/
+
+# Logs
+logs/
+
+# Server JARs (large, easily re-downloadable)
+*.jar
+
+# Libraries (can be regenerated)
+libraries/
+versions/
+
+# Temporary files
+usercache.json
+
+# Crash reports
+crash-reports/
