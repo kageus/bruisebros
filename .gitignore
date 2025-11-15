@@ -4,6 +4,8 @@
 world/
 realworld/
 survivalworld/
+world_nether/
+world_the_end/
 
 # Logs
 logs/
@@ -20,3 +22,12 @@ usercache.json
 
 # Crash reports
 crash-reports/
+
+# Plugin binaries
+plugins/
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Console history
+.console_history
