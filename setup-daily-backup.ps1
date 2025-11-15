@@ -15,8 +15,8 @@ if ($existingTask) {
 # Create the action (run the backup script)
 $action = New-ScheduledTaskAction -Execute "cmd.exe" -Argument "/c `"$scriptPath`""
 
-# Create the trigger (daily at 2:00 AM)
-$trigger = New-ScheduledTaskTrigger -Daily -At "2:00AM"
+# Create the trigger (daily at 4:00 AM)
+$trigger = New-ScheduledTaskTrigger -Daily -At "4:00AM"
 
 # Create settings
 $settings = New-ScheduledTaskSettingsSet `
@@ -40,7 +40,7 @@ Register-ScheduledTask `
 
 Write-Host "`nScheduled task created successfully!" -ForegroundColor Green
 Write-Host "Task Name: $taskName" -ForegroundColor Cyan
-Write-Host "Schedule: Daily at 2:00 AM" -ForegroundColor Cyan
+Write-Host "Schedule: Daily at 4:00 AM" -ForegroundColor Cyan
 Write-Host "Script: $scriptPath" -ForegroundColor Cyan
 Write-Host "`nYou can view/modify this task in Task Scheduler (taskschd.msc)" -ForegroundColor Yellow
 Write-Host "To run the backup manually at any time, just double-click: backup-worlds.bat" -ForegroundColor Yellow
