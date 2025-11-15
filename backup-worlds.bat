@@ -68,12 +68,21 @@ echo.
 
 REM Backup main world
 if exist "%SERVER_DIR%\world" (
-    echo Backing up world...
-    powershell -Command "Compress-Archive -Path '%SERVER_DIR%\world' -DestinationPath '%BACKUP_DIR%\world-%TIMESTAMP%.zip' -Force"
+    echo Checking world for changes...
+
+    REM Check if world folder has changed since last backup
+    powershell -Command "$worldPath = '%SERVER_DIR%\world'; $lastBackup = Get-ChildItem '%BACKUP_DIR%\world-*.zip' -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | Select-Object -First 1; if ($lastBackup) { $latestFile = Get-ChildItem -Path $worldPath -Recurse -File | Sort-Object LastWriteTime -Descending | Select-Object -First 1; if ($latestFile.LastWriteTime -gt $lastBackup.LastWriteTime) { exit 0 } else { exit 1 } } else { exit 0 }" >NUL 2>&1
+
     if !errorlevel! equ 0 (
-        echo   SUCCESS: world-%TIMESTAMP%.zip created
+        echo   Changes detected - creating backup...
+        powershell -Command "Compress-Archive -Path '%SERVER_DIR%\world' -DestinationPath '%BACKUP_DIR%\world-%TIMESTAMP%.zip' -Force"
+        if !errorlevel! equ 0 (
+            echo   SUCCESS: world-%TIMESTAMP%.zip created
+        ) else (
+            echo   ERROR: Failed to backup world
+        )
     ) else (
-        echo   ERROR: Failed to backup world
+        echo   SKIPPED: No changes since last backup - saving bandwidth
     )
 ) else (
     echo   SKIP: world folder not found
@@ -83,12 +92,21 @@ echo.
 
 REM Backup survival world
 if exist "%SERVER_DIR%\survivalworld" (
-    echo Backing up survivalworld...
-    powershell -Command "Compress-Archive -Path '%SERVER_DIR%\survivalworld' -DestinationPath '%BACKUP_DIR%\survivalworld-%TIMESTAMP%.zip' -Force"
+    echo Checking survivalworld for changes...
+
+    REM Check if world folder has changed since last backup
+    powershell -Command "$worldPath = '%SERVER_DIR%\survivalworld'; $lastBackup = Get-ChildItem '%BACKUP_DIR%\survivalworld-*.zip' -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | Select-Object -First 1; if ($lastBackup) { $latestFile = Get-ChildItem -Path $worldPath -Recurse -File | Sort-Object LastWriteTime -Descending | Select-Object -First 1; if ($latestFile.LastWriteTime -gt $lastBackup.LastWriteTime) { exit 0 } else { exit 1 } } else { exit 0 }" >NUL 2>&1
+
     if !errorlevel! equ 0 (
-        echo   SUCCESS: survivalworld-%TIMESTAMP%.zip created
+        echo   Changes detected - creating backup...
+        powershell -Command "Compress-Archive -Path '%SERVER_DIR%\survivalworld' -DestinationPath '%BACKUP_DIR%\survivalworld-%TIMESTAMP%.zip' -Force"
+        if !errorlevel! equ 0 (
+            echo   SUCCESS: survivalworld-%TIMESTAMP%.zip created
+        ) else (
+            echo   ERROR: Failed to backup survivalworld
+        )
     ) else (
-        echo   ERROR: Failed to backup survivalworld
+        echo   SKIPPED: No changes since last backup - saving bandwidth
     )
 ) else (
     echo   SKIP: survivalworld folder not found
@@ -98,12 +116,21 @@ echo.
 
 REM Backup realworld
 if exist "%SERVER_DIR%\realworld" (
-    echo Backing up realworld...
-    powershell -Command "Compress-Archive -Path '%SERVER_DIR%\realworld' -DestinationPath '%BACKUP_DIR%\realworld-%TIMESTAMP%.zip' -Force"
+    echo Checking realworld for changes...
+
+    REM Check if world folder has changed since last backup
+    powershell -Command "$worldPath = '%SERVER_DIR%\realworld'; $lastBackup = Get-ChildItem '%BACKUP_DIR%\realworld-*.zip' -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | Select-Object -First 1; if ($lastBackup) { $latestFile = Get-ChildItem -Path $worldPath -Recurse -File | Sort-Object LastWriteTime -Descending | Select-Object -First 1; if ($latestFile.LastWriteTime -gt $lastBackup.LastWriteTime) { exit 0 } else { exit 1 } } else { exit 0 }" >NUL 2>&1
+
     if !errorlevel! equ 0 (
-        echo   SUCCESS: realworld-%TIMESTAMP%.zip created
+        echo   Changes detected - creating backup...
+        powershell -Command "Compress-Archive -Path '%SERVER_DIR%\realworld' -DestinationPath '%BACKUP_DIR%\realworld-%TIMESTAMP%.zip' -Force"
+        if !errorlevel! equ 0 (
+            echo   SUCCESS: realworld-%TIMESTAMP%.zip created
+        ) else (
+            echo   ERROR: Failed to backup realworld
+        )
     ) else (
-        echo   ERROR: Failed to backup realworld
+        echo   SKIPPED: No changes since last backup - saving bandwidth
     )
 ) else (
     echo   SKIP: realworld folder not found
