@@ -29,19 +29,24 @@ tasklist /FI "IMAGENAME eq java.exe" 2>NUL | find /I "java.exe">NUL
 if "%ERRORLEVEL%"=="0" (
     echo Minecraft server is running - checking mode...
 
-    REM Determine which mode by comparing server.properties
-    fc /b "%SERVER_DIR%\server.properties" "%SERVER_DIR%\server-creative.properties" >NUL 2>&1
-    if "%ERRORLEVEL%"=="0" (
+    REM Determine which mode by checking level-name property
+    for /f "tokens=2 delims==" %%a in ('findstr /C:"level-name=" "%SERVER_DIR%\server.properties"') do set LEVEL_NAME=%%a
+
+    if "!LEVEL_NAME!"=="world" (
         set SERVER_MODE=creative
-        echo   Detected: CREATIVE mode
+        echo   Detected: CREATIVE mode (level-name=world)
     ) else (
-        fc /b "%SERVER_DIR%\server.properties" "%SERVER_DIR%\server-survival.properties" >NUL 2>&1
-        if "%ERRORLEVEL%"=="0" (
+        if "!LEVEL_NAME!"=="survivalworld" (
             set SERVER_MODE=survival
-            echo   Detected: SURVIVAL mode
+            echo   Detected: SURVIVAL mode (level-name=survivalworld)
         ) else (
-            set SERVER_MODE=unknown
-            echo   Detected: UNKNOWN mode (will not auto-restart)
+            if "!LEVEL_NAME!"=="realworld" (
+                set SERVER_MODE=creative
+                echo   Detected: CREATIVE mode (level-name=realworld)
+            ) else (
+                set SERVER_MODE=unknown
+                echo   Detected: UNKNOWN mode (level-name=!LEVEL_NAME!, will not auto-restart)
+            )
         )
     )
 
