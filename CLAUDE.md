@@ -43,8 +43,9 @@ The system uses a **configuration swapping architecture** to switch between game
 2. Mode-specific launch scripts copy the appropriate properties file to `server.properties` before starting the server:
    ```bat
    copy server-creative.properties server.properties
-   java -Xmx4G -Xms4G -jar paper-1.21.10-113.jar nogui
+   call run.bat nogui
    ```
+   Note: `run.bat` is the NeoForge launcher that handles mod loading.
 
 3. The `level-name` property determines which world folder loads:
    - Creative: `/world`
@@ -91,13 +92,14 @@ Settings flow from global to specific: Global defaults → World defaults → Pe
 
 ## Current Server Configuration
 
-- **Server Software:** PaperMC 1.21.10-113
-- **Java Memory:** 4GB min/max heap (`-Xmx4G -Xms4G`)
+- **Server Software:** NeoForge 21.10.56-beta (Minecraft 1.21.10)
+- **Previous:** PaperMC 1.21.10-113 (switched to NeoForge for mod support)
+- **Java Memory:** 4GB min/max heap (configured in `user_jvm_args.txt`)
 - **Max Players:** 6
 - **View Distance:** 8 chunks (optimized from 10)
 - **Simulation Distance:** 6 chunks (optimized from 10)
 - **Port:** 25565
-- **Performance Tuning:** `sync-chunk-writes=false`, `entity-broadcast-range=75%`, `max-tick-time=-1`
+- **Mods:** See [MODS.md](MODS.md) for installed mods and configuration
 
 ## Important Technical Notes
 
@@ -107,12 +109,14 @@ Settings flow from global to specific: Global defaults → World defaults → Pe
 - Use `enabledelayedexpansion` and `!VARIABLE!` syntax for variable expansion in loops
 - Mode detection reads `level-name` property, NOT by comparing entire files (which breaks when other settings change)
 
-### When Updating PaperMC Version
+### When Updating NeoForge Version
 
-Update the jar filename in all three launch scripts:
-- `minecraft.bat`
-- `minecraft-creative.bat`
-- `minecraft-survival.bat`
+The server now uses NeoForge instead of PaperMC to support client+server mods:
+- Download new NeoForge installer from https://neoforged.net/
+- Run installer in server directory, select "Install server"
+- The installer updates `run.bat` and library files automatically
+- Launch scripts (`minecraft-creative.bat`, `minecraft-survival.bat`) call `run.bat`, so no changes needed
+- Memory settings are in `user_jvm_args.txt` (currently 4GB min/max)
 
 The backup script does NOT need updating (it calls the bat files, not the jar directly).
 
