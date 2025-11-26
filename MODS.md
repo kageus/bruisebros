@@ -18,67 +18,90 @@ This document tracks mods installed on the server for client+server mod synchron
 
 ## Installed Mods
 
-### Animal & Creature Mods
+### Animal & Creature Mods (Compatible with NeoForge 1.21.1)
 
-#### Option 1: "More Animals" Modpack (Recommended for Kids)
-- **Version:** 23.0.0 (Sept 2025)
-- **Loader:** NeoForge 1.21.1
-- **Download:** [Modrinth - More Animals 2](https://modrinth.com/modpack/more-animals)
-- **Description:** Vanilla+ modpack with hundreds of realistic animals across all biomes
-- **Kid-Friendly:** ✅ Yes - focuses on peaceful creatures
-- **Client Required:** Yes - all players must install
-
-#### Option 2: Better Animals Plus
-- **Version:** Latest for 1.21.1
-- **Loader:** NeoForge/Fabric/Quilt
-- **Download:** CurseForge/Modrinth
-- **Description:** 35+ new animals, items, food, blocks, and armor
-- **Kid-Friendly:** ✅ Yes
-- **Client Required:** Yes
-
-#### Option 3: Animal Garden Series (Modular Approach)
-- **Version:** 1.0.0-neoforge-1.21.1
+#### Option 1: "More Animals [NEOFORGE]" Modpack (Recommended - Easy Setup)
+- **Version:** 2.0.0 (NeoForge 1.21.1)
 - **Loader:** NeoForge
-- **Download:** Modrinth (individual mods)
-- **Available Animals:** Manatee, Common Raven, etc.
-- **Kid-Friendly:** ✅ Yes
-- **Client Required:** Yes
+- **Download:** [Modrinth - More Animals](https://modrinth.com/modpack/more-animals/version/AOHQTwNY)
+- **Description:** Dozens of animal mods bundled together - realistic creatures across all biomes
+- **Kid-Friendly:** ✅ Yes - focuses on peaceful creatures
+- **Client Required:** Yes - all players must install the SAME modpack version
+- **Pros:** One-click installation via modpack launcher, all dependencies included
+- **Cons:** All-or-nothing (can't pick individual mods)
 
-### Alternative: Naturalist Mod (NOT 1.21 Compatible)
-- **Version:** 5.0pre5 (Aug 2025)
-- **Loader:** Forge/Fabric 1.20.1 ONLY
-- **Status:** ❌ Not available for 1.21+ yet
-- **Note:** Would require downgrading server to 1.20.1
+#### Option 2: Individual Mods (Custom Selection)
+Pick and choose specific animal mods:
+
+**Critters n' Crawlers** (Recommended for kids)
+- **Version:** 2.2.5 (NeoForge 1.21.1)
+- **Download:** [CurseForge](https://www.curseforge.com/minecraft/mc-mods/critters-n-crawlers)
+- **Adds:** North American animals & myths for temperate/cold biomes
+- **Kid-Friendly:** ✅ Yes
+- **File:** `critters_and_crawlers-2.2.5-neoforge.jar`
+
+**Animal Garden - Manatee**
+- **Version:** 1.0.0-neoforge-1.21.1
+- **Download:** [Modrinth](https://modrinth.com/mod/animal-garden-manatee/version/1.0.0-neoforge-1.21.1-21.1.209)
+- **Adds:** Gentle sea cows (manatees)
+- **Kid-Friendly:** ✅ Yes
+
+**Animal Garden - Common Raven**
+- **Version:** 1.0.0-neoforge-1.21.1
+- **Download:** [Modrinth](https://modrinth.com/mod/animal-garden-common-raven/version/1.0.0-neoforge-1.21.1-21.1.213)
+- **Adds:** Common ravens
+- **Kid-Friendly:** ✅ Yes
+
+**Animal Garden - Sugar Glider**
+- **Version:** 1.0.0-neoforge-1.21.1
+- **Download:** [Modrinth](https://modrinth.com/mod/animal-garden-sugar-glider)
+- **Adds:** Cute sugar gliders
+- **Kid-Friendly:** ✅ Yes
+
+#### Optional: Respawning Animals
+- **Version:** v21.1.1 (NeoForge 1.21.1)
+- **Download:** [Modrinth](https://modrinth.com/mod/respawning-animals/version/v21.1.1-1.21.1-NeoForge)
+- **Description:** Makes animals spawn/despawn like monsters (prevents overpopulation)
+- **Recommended:** Only if you notice too many animals causing lag
+
+### NOT Compatible (Future Options)
+
+**Naturalist Mod** ❌
+- **Latest:** 5.0pre5 (Forge/Fabric 1.20.1 only)
+- **Status:** Not available for 1.21.1 yet
+- **Watch:** May be updated in future
+
+**Alex's Mobs** ❌
+- **Latest:** 1.22.9 (1.20.1 only)
+- **Status:** Not available for 1.21.1 yet
+- **Note:** 80+ animals, very popular but waiting for 1.21 update
 
 ## Installation Instructions
 
 ### Server Setup
 
-1. **Backup Current Server:**
+**✅ NeoForge is Already Installed! (Version 21.10.56-beta)**
+
+1. **Backup Current Server (Always do this first!):**
    ```bat
    backup-worlds.bat
    ```
 
-2. **Download NeoForge Server:**
-   - Visit: https://neoforged.net/
-   - Download: NeoForge installer for Minecraft 1.21.1
-   - Run installer in server directory
-   - Select "Install server"
+2. **Install Mods:**
+   - Download chosen mods from links above (must be NeoForge 1.21.1 compatible)
+   - Place `.jar` files in `C:\Minecraft Server\mods\` folder
+   - **Important:** Note which mods you installed (you'll need the exact same ones for clients)
 
-3. **Install Mods:**
-   - Create `mods/` folder in server directory
-   - Download chosen mods (must match Minecraft 1.21.1 + NeoForge)
-   - Place `.jar` files in `mods/` folder
+3. **Test Server:**
+   - Start server using `minecraft-creative.bat` or `minecraft-survival.bat`
+   - Watch console for mod loading messages
+   - Look for errors (red text)
+   - Verify mods appear in server console: `[Server thread/INFO] [minecraft/DedicatedServer]: Loading mods...`
 
-4. **Update Launch Scripts:**
-   - Modify `minecraft-survival.bat` and `minecraft-creative.bat`
-   - Change jar reference from `paper-1.21.10-113.jar` to NeoForge server jar
-   - May need different memory settings
-
-5. **Test Server:**
-   - Start server
-   - Check logs for mod loading errors
-   - Verify mods appear in server console
+4. **Troubleshooting:**
+   - If server won't start: Check `logs/latest.log` for errors
+   - Missing dependencies: Some mods require other mods (called "dependencies")
+   - Version mismatch: Ensure all mods say "NeoForge 1.21.1" in their filename
 
 ### Client Setup (For All Players)
 
