@@ -26,6 +26,15 @@ crash-reports/
 # Plugin binaries
 plugins/
 
+# Mod binaries and runtime data
+mods/*.jar
+mods/**/*.jar
+mods/**/data/
+mods/**/cache/
+
+# BUT track mod configs
+!config/
+
 # Claude Code local settings
 .claude/settings.local.json
 

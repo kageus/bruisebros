@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a PaperMC-based Minecraft server management system designed for multi-mode server switching (Creative and Survival modes) with automated backup capabilities. The server runs on Windows.
 
+**Note:** For information about installing client+server mods (Forge/Fabric/NeoForge), see [MODS.md](MODS.md).
+
 ## Server Launch Commands
 
 **Start Creative Mode:**
