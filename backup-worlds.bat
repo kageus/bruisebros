@@ -203,4 +203,6 @@ echo ========================================
 echo.
 
 endlocal
+REM Don't pause when running from scheduled task
+if "%1"=="scheduled" exit /b 0
 pause

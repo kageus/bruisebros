@@ -12,8 +12,8 @@ if ($existingTask) {
     Unregister-ScheduledTask -TaskName $taskName -Confirm:$false
 }
 
-# Create the action (run the backup script)
-$action = New-ScheduledTaskAction -Execute "cmd.exe" -Argument "/c `"$scriptPath`""
+# Create the action (run the backup script with 'scheduled' parameter to skip pause)
+$action = New-ScheduledTaskAction -Execute "cmd.exe" -Argument "/c `"$scriptPath`" scheduled"
 
 # Create the trigger (daily at 4:00 AM)
 $trigger = New-ScheduledTaskTrigger -Daily -At "4:00AM"
