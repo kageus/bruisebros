@@ -4,9 +4,50 @@ This document tracks mods installed on the server for client+server mod synchron
 
 ## Server Information
 
-- **Minecraft Version:** 1.21.1 (transitioning from PaperMC)
-- **Mod Loader:** NeoForge (recommended for 1.21.1)
+- **Minecraft Version:** 1.21.1
+- **Mod Loader:** NeoForge 21.10.56-beta (✅ installed)
 - **Java Version:** Java 21+ required for 1.21.1
+- **Current Status:** NeoForge installed, running vanilla (no mods yet)
+
+## Recommended Approach: Modpacks
+
+**⭐ For family servers, use modpacks instead of individual mods!**
+
+See **[MODPACK-SETUP.md](MODPACK-SETUP.md)** for complete guide.
+
+### Why Modpacks?
+
+| Method | Setup Time | Maintenance | Version Matching | Updates |
+|--------|-----------|-------------|------------------|---------|
+| **Modpack** | 2-3 hours | Low | Automatic | One-click |
+| **Individual Mods** | 1-2 hours | High | Manual | Manual per mod |
+
+**Modpack advantages:**
+- ✅ One-click client installation
+- ✅ Automatic dependency resolution
+- ✅ Version locking (server/client always match)
+- ✅ One-click updates for kids
+- ✅ 70-80% less maintenance time
+
+**Individual mod problems:**
+- ❌ Manual dependency tracking
+- ❌ Version mismatch nightmares
+- ❌ Kids' clients get out of sync
+- ❌ Hours of troubleshooting per update
+
+### Quick Start with Modpacks
+
+1. **Create modpack on Modrinth** (see MODPACK-SETUP.md)
+2. **Download server pack** and install to `mods/` folder
+3. **Kids install Prism Launcher** (see CLIENT-SETUP.md)
+4. **Share modpack link** - kids one-click install
+5. **Done!** Updates are one-click for everyone
+
+---
+
+## Individual Mods Reference
+
+If you need to manage individual mods, this section lists compatible options.
 
 ## Mod Loader Options for 1.21.1
 
@@ -18,20 +59,39 @@ This document tracks mods installed on the server for client+server mod synchron
 
 ## Installed Mods
 
-### Animal & Creature Mods (Compatible with NeoForge 1.21.1)
+### Recommended Stable Animal Mods for NeoForge 1.21.1
 
-#### Option 1: "More Animals [NEOFORGE]" Modpack (Recommended - Easy Setup)
-- **Version:** 2.0.0 (NeoForge 1.21.1)
-- **Loader:** NeoForge
-- **Download:** [Modrinth - More Animals](https://modrinth.com/modpack/more-animals/version/AOHQTwNY)
-- **Description:** Dozens of animal mods bundled together - realistic creatures across all biomes
-- **Kid-Friendly:** ✅ Yes - focuses on peaceful creatures
-- **Client Required:** Yes - all players must install the SAME modpack version
-- **Pros:** One-click installation via modpack launcher, all dependencies included
-- **Cons:** All-or-nothing (can't pick individual mods)
+#### Tier S: Proven Stable for Family Servers
 
-#### Option 2: Individual Mods (Custom Selection)
-Pick and choose specific animal mods:
+**Alex's Mobs** ⭐
+- **Most popular animal mod** - 80+ creatures (realistic + fantasy)
+- **Download:** Search Modrinth/CurseForge for NeoForge 1.21.1 version
+- **Dependency:** Citadel (auto-included in modpacks)
+- **Kid-Friendly:** ✅ Yes - dolphins, elephants, kangaroos, etc.
+- **Performance:** Good
+
+**Naturalist**
+- **Realistic animals** - bears, deer, snakes, birds
+- **Download:** Search Modrinth/CurseForge for NeoForge 1.21.1 version
+- **Dependencies:** None
+- **Kid-Friendly:** ✅ Yes - educational and peaceful
+- **Performance:** Excellent (lighter than Alex's Mobs)
+
+**Critters and Companions**
+- **Cute whimsical creatures**
+- **Download:** Search Modrinth/CurseForge for NeoForge 1.21.1 version
+- **Dependencies:** None
+- **Kid-Friendly:** ✅ Yes - adorable designs
+- **Performance:** Good
+
+**Recommended Combo:** Alex's Mobs + Naturalist + Critters and Companions
+- Proven to work together without conflicts
+- Wide variety of animals
+- Good performance balance
+
+#### Individual Mods (Alternative Options)
+
+Pick and choose specific animal mods if not using modpack:
 
 **Critters n' Crawlers** (Recommended for kids)
 - **Version:** 2.2.5 (NeoForge 1.21.1)
@@ -64,69 +124,76 @@ Pick and choose specific animal mods:
 - **Description:** Makes animals spawn/despawn like monsters (prevents overpopulation)
 - **Recommended:** Only if you notice too many animals causing lag
 
-### NOT Compatible (Future Options)
+### Known Issues with Some Mods
 
-**Naturalist Mod** ❌
-- **Latest:** 5.0pre5 (Forge/Fabric 1.20.1 only)
-- **Status:** Not available for 1.21.1 yet
-- **Watch:** May be updated in future
+**MoAnimals** ❌
+- **Version:** 0.0.2-ALPHA
+- **Status:** Incompatible with NeoForge 21.10.56-beta
+- **Issue:** Event registration bug causes server crash
+- **Recommendation:** Avoid until stable release
 
-**Alex's Mobs** ❌
-- **Latest:** 1.22.9 (1.20.1 only)
-- **Status:** Not available for 1.21.1 yet
-- **Note:** 80+ animals, very popular but waiting for 1.21 update
+**Critters n' Crawlers (standalone)** ⚠️
+- **Version:** 2.2.5
+- **Status:** Works but has version check issue
+- **Issue:** Expects Minecraft 1.21.1 notation, NeoForge reports 1.21.10
+- **Workaround:** May work in modpacks with proper dependencies
+- **Recommendation:** Use in modpack context, not standalone
 
 ## Installation Instructions
 
-### Server Setup
+### Recommended: Modpack Method
+
+**See [MODPACK-SETUP.md](MODPACK-SETUP.md) for complete guide.**
+
+Quick overview:
+1. Create modpack on Modrinth with desired mods
+2. Download server pack → install to `mods/` folder
+3. Kids install Prism Launcher → one-click install modpack
+4. Done! Server and clients automatically match
+
+### Alternative: Manual Individual Mods
+
+**⚠️ Not recommended for families - use modpacks instead!**
+
+If you must install individual mods manually:
+
+#### Server Setup
 
 **✅ NeoForge is Already Installed! (Version 21.10.56-beta)**
 
-1. **Backup Current Server (Always do this first!):**
+1. **Backup Current Server:**
    ```bat
    backup-worlds.bat
    ```
 
 2. **Install Mods:**
-   - Download chosen mods from links above (must be NeoForge 1.21.1 compatible)
+   - Download chosen mods (must be NeoForge 1.21.1 compatible)
    - Place `.jar` files in `C:\Minecraft Server\mods\` folder
-   - **Important:** Note which mods you installed (you'll need the exact same ones for clients)
+   - Track which mods + versions you installed (you'll need exact same for clients)
 
 3. **Test Server:**
    - Start server using `minecraft-creative.bat` or `minecraft-survival.bat`
    - Watch console for mod loading messages
-   - Look for errors (red text)
-   - Verify mods appear in server console: `[Server thread/INFO] [minecraft/DedicatedServer]: Loading mods...`
+   - Check for errors (red text)
+   - Verify: `[Server thread/INFO] [minecraft/DedicatedServer]: Loading mods...`
 
 4. **Troubleshooting:**
-   - If server won't start: Check `logs/latest.log` for errors
-   - Missing dependencies: Some mods require other mods (called "dependencies")
-   - Version mismatch: Ensure all mods say "NeoForge 1.21.1" in their filename
+   - Server won't start: Check `logs/latest.log` for errors
+   - Missing dependencies: Install required library mods
+   - Version mismatch: Ensure all mods say "NeoForge 1.21.1"
 
-### Client Setup (For All Players)
+#### Client Setup (For All Players)
 
-1. **Install NeoForge Client:**
-   - Download NeoForge installer: https://neoforged.net/
-   - Run installer
-   - Select "Install client"
-   - Choose Minecraft installation directory
+**See [CLIENT-SETUP.md](CLIENT-SETUP.md) for kid-friendly instructions.**
 
-2. **Install Same Mods:**
-   - Download EXACT same mod versions as server
-   - Place in: `%AppData%\.minecraft\mods\` (Windows)
-   - Or use Minecraft launcher profiles folder
+Manual method (not recommended):
+1. Install Prism Launcher (replaces MultiMC)
+2. Create NeoForge 1.21.1 instance
+3. Download EXACT same mod versions as server
+4. Place in instance mods folder
+5. Launch and connect
 
-3. **Launch Game:**
-   - Open Minecraft Launcher
-   - Select "NeoForge 1.21.1" profile
-   - Launch and connect to server
-
-### Important Notes
-
-- ⚠️ **All clients must have EXACT same mods as server**
-- ⚠️ **Mod versions must match exactly** (1.21.1 mods only)
-- ⚠️ **Backup worlds before switching from PaperMC to NeoForge**
-- ⚠️ **Some PaperMC optimizations will be lost**
+**Warning:** Manual sync is error-prone. Use modpacks!
 
 ## Mod Configuration Files
 

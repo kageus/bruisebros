@@ -4,9 +4,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a PaperMC-based Minecraft server management system designed for multi-mode server switching (Creative and Survival modes) with automated backup capabilities. The server runs on Windows.
+This is a NeoForge-based Minecraft server management system designed for multi-mode server switching (Creative and Survival modes) with automated backup capabilities. The server runs on Windows.
 
-**Note:** For information about installing client+server mods (Forge/Fabric/NeoForge), see [MODS.md](MODS.md).
+**Mod Management:** The server supports NeoForge mods. For best results with family servers:
+- See [MODPACK-SETUP.md](MODPACK-SETUP.md) - Creating and managing Modrinth modpacks (recommended)
+- See [CLIENT-SETUP.md](CLIENT-SETUP.md) - Kid-friendly client installation guide
+- See [MODS.md](MODS.md) - Individual mod reference and compatibility info
 
 ## Server Launch Commands
 
@@ -92,14 +95,23 @@ Settings flow from global to specific: Global defaults → World defaults → Pe
 
 ## Current Server Configuration
 
-- **Server Software:** NeoForge 21.10.56-beta (Minecraft 1.21.10)
+- **Server Software:** NeoForge 21.10.56-beta (Minecraft 1.21.1/1.21.10)
 - **Previous:** PaperMC 1.21.10-113 (switched to NeoForge for mod support)
 - **Java Memory:** 4GB min/max heap (configured in `user_jvm_args.txt`)
 - **Max Players:** 6
-- **View Distance:** 8 chunks (optimized from 10)
-- **Simulation Distance:** 6 chunks (optimized from 10)
+- **View Distance:** 8 chunks
+- **Simulation Distance:** 6 chunks
 - **Port:** 25565
-- **Mods:** See [MODS.md](MODS.md) for installed mods and configuration
+- **Network:** Bound to 192.168.86.102 (local network only)
+- **Mods:** Currently running vanilla (no mods installed yet)
+- **Modpack Status:** Ready for modpack installation - see MODPACK-SETUP.md
+
+### Survival Mode Settings (Kid-Friendly)
+- **Difficulty:** Peaceful (no monsters)
+- **Allow Flight:** Enabled
+- **Keep Inventory:** Enabled (via survival-gamerules.txt)
+- **Fire Spread:** Disabled
+- **Natural Regeneration:** Enabled
 
 ## Important Technical Notes
 
@@ -109,16 +121,29 @@ Settings flow from global to specific: Global defaults → World defaults → Pe
 - Use `enabledelayedexpansion` and `!VARIABLE!` syntax for variable expansion in loops
 - Mode detection reads `level-name` property, NOT by comparing entire files (which breaks when other settings change)
 
-### When Updating NeoForge Version
+### NeoForge and Mod Management
 
-The server now uses NeoForge instead of PaperMC to support client+server mods:
+The server uses **NeoForge** instead of PaperMC to support client+server mods.
+
+**For family servers, use modpacks (not individual mods):**
+- **Why:** Automatic dependency resolution, version locking, one-click client installation
+- **How:** See [MODPACK-SETUP.md](MODPACK-SETUP.md) for complete guide
+- **Client setup:** See [CLIENT-SETUP.md](CLIENT-SETUP.md) for kid-friendly instructions
+
+**Updating NeoForge version:**
 - Download new NeoForge installer from https://neoforged.net/
 - Run installer in server directory, select "Install server"
 - The installer updates `run.bat` and library files automatically
 - Launch scripts (`minecraft-creative.bat`, `minecraft-survival.bat`) call `run.bat`, so no changes needed
 - Memory settings are in `user_jvm_args.txt` (currently 4GB min/max)
 
-The backup script does NOT need updating (it calls the bat files, not the jar directly).
+**The backup script does NOT need updating** (it calls the bat files, not the jar directly).
+
+**Modpack workflow:**
+1. Create/update modpack on Modrinth → generates server pack
+2. Install server pack to `mods/` folder
+3. Kids update via Prism Launcher (one-click)
+4. Server and clients automatically stay in sync
 
 ### Performance Optimization History
 
